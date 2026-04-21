@@ -1,5 +1,3 @@
-/* styles.css */
-
 /* --- Variables & Reset --- */
 :root {
     --primary: #6c63ff; 
@@ -262,12 +260,11 @@ body {
     text-align: center;
 }
 
-/* --- Redesigned Projects Section --- */
+/* --- Projects & Certificates Grid --- */
 .projects-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
     gap: 2.5rem;
-    padding-top: 1rem;
 }
 
 .project-card {
@@ -290,6 +287,7 @@ body {
     position: relative;
     height: 220px;
     overflow: hidden;
+    background: #eee;
 }
 
 .project-image {
@@ -299,7 +297,21 @@ body {
     transition: transform 0.5s ease;
 }
 
-.project-card:hover .project-image {
+/* --- Blink Animation --- */
+@keyframes blinkPulse {
+    0% { opacity: 1; }
+    50% { opacity: 0.6; }
+    100% { opacity: 1; }
+}
+
+.blink-image {
+    animation: blinkPulse 2.5s ease-in-out infinite;
+}
+
+/* Stop blinking and zoom image on hover */
+.project-card:hover .blink-image {
+    animation-play-state: paused;
+    opacity: 1;
     transform: scale(1.08);
 }
 
@@ -315,6 +327,7 @@ body {
     font-weight: 700;
     text-transform: uppercase;
     backdrop-filter: blur(4px);
+    z-index: 2;
 }
 
 .project-body {
@@ -325,7 +338,7 @@ body {
 }
 
 .project-body h3 {
-    font-size: 1.4rem;
+    font-size: 1.3rem;
     margin-bottom: 0.8rem;
     color: var(--dark);
     line-height: 1.3;
@@ -334,7 +347,7 @@ body {
 .project-body p {
     color: var(--grey);
     font-size: 0.95rem;
-    margin-bottom: 2rem;
+    margin-bottom: 1.5rem;
     line-height: 1.6;
     flex-grow: 1;
 }
@@ -347,29 +360,9 @@ body {
     display: inline-flex;
     align-items: center;
     gap: 0.5rem;
-    transition: color 0.3s ease;
 }
 
-.project-link:hover {
-    color: var(--accent);
-}
-
-.project-link i {
-    font-size: 0.8rem;
-    transition: transform 0.3s ease;
-}
-
-.project-link:hover i {
-    transform: translate(2px, -2px);
-}
-
-/* Responsive Tweak */
-@media (max-width: 480px) {
-    .projects-grid {
-        grid-template-columns: 1fr;
-    }
-}
-/* --- Tools Section --- */
+/* --- Tools --- */
 .tools-container {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
@@ -377,7 +370,7 @@ body {
 }
 
 .tool-group h3 {
-    font-size: 1.1rem;
+    font-size: 1rem;
     color: var(--grey);
     margin-bottom: 1.5rem;
     text-transform: uppercase;
@@ -396,37 +389,31 @@ body {
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 0.8rem;
+    gap: 0.5rem;
+}
+
+.tool-icon {
+    font-size: 2rem;
+    color: var(--primary);
     transition: var(--transition);
 }
 
-.tool-item img {
-    width: 45px;
-    height: 45px;
-    object-fit: contain;
-    filter: grayscale(100%);
-    transition: var(--transition);
-    opacity: 0.7;
-}
-
-.tool-item:hover img {
-    filter: grayscale(0%);
+.tool-item:hover .tool-icon {
+    color: var(--accent);
     transform: scale(1.1);
-    opacity: 1;
 }
 
 .tool-item span {
-    font-size: 0.75rem;
+    font-size: 0.7rem;
     font-weight: 600;
     color: var(--grey);
-    text-align: center;
 }
 
 /* --- Contact --- */
 .contact-links {
     display: flex;
     justify-content: center;
-    gap: 2rem;
+    gap: 1.5rem;
     flex-wrap: wrap;
 }
 
@@ -434,11 +421,11 @@ body {
     text-decoration: none;
     color: var(--primary);
     font-weight: 700;
-    padding: 1.2rem 2.5rem;
-    border-radius: 15px;
+    padding: 1rem 2rem;
+    border-radius: 12px;
     background: var(--white);
-    transition: var(--transition);
     border: 2px solid var(--primary);
+    transition: var(--transition);
 }
 
 .contact-item:hover {
@@ -449,62 +436,17 @@ body {
 
 /* --- Footer --- */
 .footer {
-    padding: 4rem 0;
+    padding: 3rem 0;
     text-align: center;
     background: #1a1a1a;
     color: var(--white);
 }
 
-.small {
-    font-size: 0.85rem;
-    opacity: 0.5;
-    margin-top: 1rem;
-}
-
 /* --- Responsive --- */
-@media (max-width: 992px) {
-    .hero-content h1 { font-size: 3rem; }
-}
-
 @media (max-width: 768px) {
-    .hero-grid {
-        grid-template-columns: 1fr;
-        text-align: center;
-        gap: 3rem;
-    }
-
+    .hero-grid { grid-template-columns: 1fr; text-align: center; }
     .hero-image { order: -1; }
-    .hero-image img { max-width: 280px; }
-    .cta-group { justify-content: center; }
-    
-    .about-content { grid-template-columns: 1fr; }
+    .hero-content h1 { font-size: 3rem; }
     .nav-links { display: none; }
-    
-    .contact-links { flex-direction: column; align-items: stretch; }
-    .contact-item { text-align: center; }
-}
-/* Add/Replace these specific parts in your style.css */
-
-.tool-icon {
-    font-size: 2.5rem;
-    color: var(--primary);
-    margin-bottom: 0.5rem;
-    transition: var(--transition);
-}
-
-.tool-item:hover .tool-icon {
-    transform: scale(1.1);
-    color: var(--accent);
-}
-
-.contact-item i {
-    margin-right: 8px;
-    font-size: 1.2rem;
-}
-
-/* Ensure images load correctly */
-.hero-image img, .project-img img {
-    display: block;
-    max-width: 100%;
-    height: auto;
+    .cta-group { justify-content: center; }
 }
